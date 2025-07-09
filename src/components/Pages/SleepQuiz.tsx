@@ -353,13 +353,18 @@ const SleepQuiz: React.FC<SleepQuizProps> = ({ onBack }) => {
       setAnswers(newAnswers);
       setSelectedAnswer(null);
 
-      // Scroll to top when moving to next question
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
+        // Scroll to top after state update
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 50);
       } else {
         setShowResults(true);
+        // Scroll to top when showing results
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 50);
       }
     }
   };
@@ -370,8 +375,10 @@ const SleepQuiz: React.FC<SleepQuizProps> = ({ onBack }) => {
       setAnswers(answers.slice(0, -1));
       setSelectedAnswer(null);
       
-      // Scroll to top when moving to previous question
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Scroll to top after state update
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 50);
     }
   };
 
@@ -380,6 +387,11 @@ const SleepQuiz: React.FC<SleepQuizProps> = ({ onBack }) => {
     setAnswers([]);
     setShowResults(false);
     setSelectedAnswer(null);
+    
+    // Scroll to top when resetting quiz
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 50);
   };
 
   const totalScore = answers.reduce((sum, score) => sum + score, 0);
